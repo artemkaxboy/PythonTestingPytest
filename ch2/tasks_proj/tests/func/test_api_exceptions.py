@@ -2,12 +2,29 @@
 
 import pytest
 import tasks
+from tasks.api import UninitializedDatabase
 
 
 def test_add_raises():
     """add() should raise an exception with wrong type param."""
     with pytest.raises(TypeError):
         tasks.add(task='not a Task object')
+
+
+def test_add_bad_summary():
+    """add() should raise an exception with bad summary."""
+    with pytest.raises(ValueError) as excinfo:
+        tasks.add(task=tasks.Task(123, 'brian'))
+    exception_msg = excinfo.value.args[0]
+    assert exception_msg == "task.summary must be string"
+
+
+def test_add_bad_owner():
+    """add() should raise an exception with bad owner."""
+    with pytest.raises(ValueError) as excinfo:
+        tasks.add(task=tasks.Task('brian', 13))
+    exception_msg = excinfo.value.args[0]
+    assert exception_msg == "task.owner must be string or None)"
 
 
 @pytest.mark.smoke
@@ -52,3 +69,9 @@ def test_start_tasks_db_raises():
         tasks.start_tasks_db('some/great/path', 'mysql')
     exception_msg = excinfo.value.args[0]
     assert exception_msg == "db_type must be a 'tiny' or 'mongo'"
+
+
+def test_count_raises():
+    """count() should raise an exception with uninitialized DB."""
+    with pytest.raises(UninitializedDatabase):
+        tasks.count()
