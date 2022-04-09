@@ -1,0 +1,7 @@
+six~=1.16.0
+click~=7.1.2 # version 7.1.2 is fixed in setup.py
+tasks~=0.1.0
+tinydb~=3.15.1 # version 3.15.1 is fixed in setup.py
+setuptools~=62.0.0
+pymongo~=4.1.0
+pytest~=7.1.1
