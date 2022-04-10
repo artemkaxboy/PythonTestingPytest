@@ -13,7 +13,7 @@ def test_count_zero_tasks_when_db_empty():
     assert tasks.count() == 0
 
 
-def test_count_one_task_when_db_has_one_task(initialized_tasks_db):
+def test_count_one_task_when_db_has_one_task():
     """Calling tasks.count() on a db with one item should return 1."""
     # GIVEN an initialized tasks db
     #   AND a new task is added
@@ -26,7 +26,7 @@ def test_count_one_task_when_db_has_one_task(initialized_tasks_db):
 
 
 @pytest.mark.parametrize('expected_count', (0, 1, 2, 100))
-def test_count_n_tasks_when_db_has_n_tasks(initialized_tasks_db, expected_count):
+def test_count_n_tasks_when_db_has_n_tasks(expected_count):
     """Calling tasks.count() on a db with two items should return 2."""
     # GIVEN an initialized tasks db
     #   AND n new tasks are added
